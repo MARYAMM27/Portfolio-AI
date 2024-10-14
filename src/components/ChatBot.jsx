@@ -1,4 +1,3 @@
-// src/components/ChatBot.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import nlp from 'compromise';
 import { doc, getDoc } from 'firebase/firestore';
@@ -13,7 +12,6 @@ const ChatBot = () => {
   const [isAdminPanelVisible, setIsAdminPanelVisible] = useState(false);
   const chatWindowRef = useRef(null);
 
-  // Predefined tags with unique IDs
   const predefinedTags = [
     { id: '1', label: 'Skills', query: 'What skills do you have?' },
     { id: '2', label: 'Experience', query: 'Tell me about your experience.' },
@@ -21,7 +19,6 @@ const ChatBot = () => {
     { id: '4', label: 'Projects', query: 'What projects have you worked on?' },
   ];
 
-  // Informational bubbles with unique IDs
   const infoBubbles = [
     { id: 'a', text: "I'm here to help you with my portfolio." },
     { id: 'b', text: 'You can ask me about my skills, experience, or projects.' },
@@ -29,7 +26,6 @@ const ChatBot = () => {
     { id: 'd', text: "I'm a virtual assistant designed to make information accessible!" },
   ];
 
-  // Fetch cvData from Firestore
   const fetchCvData = async () => {
     try {
       const docRef = doc(db, 'cvData', 'cvData');
@@ -38,7 +34,6 @@ const ChatBot = () => {
         setCvData(docSnap.data());
       }
     } catch (error) {
-      // Handle error gracefully, e.g., display an error message to the user
       setMessages((prev) => [
         ...prev,
         { id: Date.now(), text: 'Error fetching data. Please try again later.', sender: 'bot' },
@@ -46,7 +41,6 @@ const ChatBot = () => {
     }
   };
 
-  // Intro message when the component loads
   useEffect(() => {
     setMessages([
       {
@@ -58,14 +52,12 @@ const ChatBot = () => {
     fetchCvData();
   }, []);
 
-  // Scroll chat window to the bottom
   useEffect(() => {
     if (chatWindowRef.current) {
       chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
     }
   }, [messages]);
 
-  // Normalize user queries
   const normalizeQuery = (query) => {
     const doc = nlp(query.toLowerCase());
     let normalizedQuery = query.toLowerCase();
@@ -89,30 +81,20 @@ const ChatBot = () => {
     return normalizedQuery;
   };
 
-  // Response mapping for bot answers
   const responseMap = {
     hi: 'Hello! I am here to assist you with information about my portfolio. How can I help you today?',
     name: () => `My name is ${cvData?.name || 'N/A'}. It's a pleasure to meet you.`,
     profession: () => `I am a dedicated professional in the field of ${cvData?.profession || 'N/A'}.`,
     skills: () => `I possess a range of skills, including: ${cvData?.skills || 'N/A'}.`,
-    experience: () => (cvData?.experience
-      ? `I have professional experience as a ${cvData.experience}.`
-      : 'I currently do not have any documented professional experience.'),
-    projects: () => (cvData?.projects
-      ? `I have successfully completed several projects, including: ${cvData.projects}.`
-      : 'I do not have any projects listed at this moment.'),
-    education: () => (cvData?.education
-      ? `I hold a degree in ${cvData.education}.`
-      : 'I currently do not have any educational qualifications listed.'),
+    experience: () => (cvData?.experience ? `I have professional experience as a ${cvData.experience}.` : 'I currently do not have any documented professional experience.'),
+    projects: () => (cvData?.projects ? `I have successfully completed several projects, including: ${cvData.projects}.` : 'I do not have any projects listed at this moment.'),
+    education: () => (cvData?.education ? `I hold a degree in ${cvData.education}.` : 'I currently do not have any educational qualifications listed.'),
     contact: () => `You can reach me via email at ${cvData?.contact?.email || 'N/A'} or by phone at ${cvData?.contact?.phone || 'N/A'}.`,
   };
 
-  // Handle bot responses based on the user's query
-  // Handle bot responses based on the user's query
   const handleBotResponse = (query) => {
     const normalizedQuery = normalizeQuery(query);
     const doc = nlp(normalizedQuery);
-
     const responseKey = Object.keys(responseMap).find((key) => doc.has(key));
 
     if (responseKey) {
@@ -122,7 +104,6 @@ const ChatBot = () => {
     return "I'm sorry, I don't have an answer for that. Try asking about my skills, experience, or projects.";
   };
 
-  // Handle user input submission
   const handleSubmit = (query) => {
     if (query.trim()) {
       const userMessage = { id: Date.now(), text: query, sender: 'user' };
@@ -136,14 +117,14 @@ const ChatBot = () => {
     }
   };
 
-  // Handle predefined tag clicks
   const handleTagClick = (query) => {
     handleSubmit(query);
   };
 
-  // Toggle admin panel visibility
   const toggleAdminPanel = () => {
-    setIsAdminPanelVisible((prev) => !prev);
+    if (cvData) {
+      setIsAdminPanelVisible((prev) => !prev);
+    }
   };
 
   return (
@@ -157,7 +138,7 @@ const ChatBot = () => {
       </div>
 
       <div className="chatbot-full-page">
-        {isAdminPanelVisible ? (
+        {isAdminPanelVisible && cvData ? (
           <AdminPanel cvData={cvData} setCvData={setCvData} />
         ) : (
           <>

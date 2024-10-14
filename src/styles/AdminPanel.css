@@ -125,3 +125,23 @@
     font-size: 0.9rem;
   }
 }
+/* Styles for spacing between the buttons */
+.admin-panel form button[type="submit"] {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel button[type="button"] {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f0f0f0; /* or any color of choice */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Additional styling for button hover effect */
+.admin-panel button:hover {
+  background-color: #e0e0e0;
+}

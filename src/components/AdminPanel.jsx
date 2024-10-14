@@ -30,7 +30,8 @@ const AdminPanel = ({ cvData, setCvData }) => {
       }
       setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
     } catch (error) {
-      setError('Authentication failed. Please check your credentials.');
+      console.error("Firebase error: ", error); // Logs the exact error for debugging
+      setError(error.message || 'Authentication failed. Please check your credentials.');
     }
   };
 
