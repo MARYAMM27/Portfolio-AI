@@ -14,6 +14,7 @@ const AdminPanel = ({ cvData, setCvData }) => {
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
+  // Handle login or signup process
   const handleLoginOrSignup = async (e) => {
     e.preventDefault();
     setError('');
@@ -30,11 +31,11 @@ const AdminPanel = ({ cvData, setCvData }) => {
       }
       setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
     } catch (error) {
-      console.error("Firebase error: ", error); // Logs the exact error for debugging
       setError(error.message || 'Authentication failed. Please check your credentials.');
     }
   };
 
+  // Update the CV data in Firestore
   const handleUpdate = async () => {
     try {
       const docRef = doc(db, 'cvData', 'cvData');
@@ -47,14 +48,16 @@ const AdminPanel = ({ cvData, setCvData }) => {
     }
   };
 
+  // Resize textarea based on content
   const handleTextareaResize = (e) => {
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
+    e.target.style.height = 'auto'; // Reset height
+    e.target.style.height = `${e.target.scrollHeight}px`; // Set height based on content
   };
 
+  // Toggle between login and signup modes
   const toggleAuthMode = () => {
     setIsSigningUp((prev) => !prev);
-    setError('');
+    setError(''); // Clear any existing errors
   };
 
   return (
@@ -163,6 +166,7 @@ const AdminPanel = ({ cvData, setCvData }) => {
   );
 };
 
+// Define PropTypes for type-checking
 AdminPanel.propTypes = {
   cvData: PropTypes.shape({
     name: PropTypes.string.isRequired,
