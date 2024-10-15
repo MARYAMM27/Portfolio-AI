@@ -270,3 +270,23 @@ body {
   background-color: #3285d7; /* Darker blue on hover */
   transform: translateY(-3px); /* Lift effect */
 }
+.tag-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-icon {
+  font-size: 16px;
+}

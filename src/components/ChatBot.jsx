@@ -5,6 +5,10 @@ import { db } from '../firebaseConfig';
 import '../styles/ChatBot.css';
 import AdminPanel from './AdminPanel';
 
+// Import Font Awesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCode, faBriefcase, faGraduationCap, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
+
 const ChatBot = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
@@ -12,11 +16,12 @@ const ChatBot = () => {
   const [isAdminPanelVisible, setIsAdminPanelVisible] = useState(false);
   const chatWindowRef = useRef(null);
 
+  // Predefined tags with icons
   const predefinedTags = [
-    { id: '1', label: 'Skills', query: 'What skills do you have?' },
-    { id: '2', label: 'Experience', query: 'Tell me about your experience.' },
-    { id: '3', label: 'Education', query: 'Tell me about your education.' },
-    { id: '4', label: 'Projects', query: 'What projects have you worked on?' },
+    { id: '1', label: 'Skills', query: 'What skills do you have?', icon: faCode },
+    { id: '2', label: 'Experience', query: 'Tell me about your experience.', icon: faBriefcase },
+    { id: '3', label: 'Education', query: 'Tell me about your education.', icon: faGraduationCap },
+    { id: '4', label: 'Projects', query: 'What projects have you worked on?', icon: faProjectDiagram },
   ];
 
   const infoBubbles = [
@@ -41,16 +46,16 @@ const ChatBot = () => {
     }
   };
 
-  useEffect(() => {
-    setMessages([
-      {
-        id: Date.now(),
-        text: 'Hello! I am your Portfolio Assistant. Feel free to ask me about skills, experience, or projects.',
-        sender: 'bot',
-      },
-    ]);
-    fetchCvData();
-  }, []);
+   useEffect(() => {
+  //   setMessages([
+  //     {
+  //       id: Date.now(),
+  //       text: 'Hello! I am your Portfolio Assistant. Feel free to ask me about skills, experience, or projects.',
+  //       sender: 'bot',
+  //     },
+  //   ]);
+     fetchCvData();
+   }, []);
 
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -153,6 +158,7 @@ const ChatBot = () => {
             <div className="predefined-tags">
               {predefinedTags.map((tag) => (
                 <button key={tag.id} onClick={() => handleTagClick(tag.query)} className="tag-button glow-circle" type="button">
+                  <FontAwesomeIcon icon={tag.icon} className="tag-icon" />
                   {tag.label}
                 </button>
               ))}

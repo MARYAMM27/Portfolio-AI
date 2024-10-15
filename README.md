@@ -3,3 +3,4 @@ This project is a mini chat application inspired by OpenAI's ChatGPT, built usin
 
 npx stylelint "**/*.{css,scss}" --fix
 
+
