@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import nlp from 'compromise';
+import { FontAwesomeIcon }
+  from '@fortawesome/react-fontawesome';
+import {
+  faCode,
+  faBriefcase,
+  faGraduationCap,
+  faProjectDiagram,
+} from '@fortawesome/free-solid-svg-icons';
+
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import '../styles/ChatBot.css';
 import AdminPanel from './AdminPanel';
-
-// Import Font Awesome icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCode, faBriefcase, faGraduationCap, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 
 const ChatBot = () => {
   const [input, setInput] = useState('');
@@ -18,10 +23,18 @@ const ChatBot = () => {
 
   // Predefined tags with icons
   const predefinedTags = [
-    { id: '1', label: 'Skills', query: 'What skills do you have?', icon: faCode },
-    { id: '2', label: 'Experience', query: 'Tell me about your experience.', icon: faBriefcase },
-    { id: '3', label: 'Education', query: 'Tell me about your education.', icon: faGraduationCap },
-    { id: '4', label: 'Projects', query: 'What projects have you worked on?', icon: faProjectDiagram },
+    {
+      id: '1', label: 'Skills', query: 'What skills do you have?', icon: faCode,
+    },
+    {
+      id: '2', label: 'Experience', query: 'Tell me about your experience.', icon: faBriefcase,
+    },
+    {
+      id: '3', label: 'Education', query: 'Tell me about your education.', icon: faGraduationCap,
+    },
+    {
+      id: '4', label: 'Projects', query: 'What projects have you worked on?', icon: faProjectDiagram,
+    },
   ];
 
   const infoBubbles = [
@@ -46,16 +59,17 @@ const ChatBot = () => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
   //   setMessages([
   //     {
   //       id: Date.now(),
-  //       text: 'Hello! I am your Portfolio Assistant. Feel free to ask me about skills, experience, or projects.',
+  //       text: 'Hello! I am your Portfolio Assistant. Feel
+  // free to ask me about skills, experience, or projects.',
   //       sender: 'bot',
   //     },
   //   ]);
-     fetchCvData();
-   }, []);
+    fetchCvData();
+  }, []);
 
   useEffect(() => {
     if (chatWindowRef.current) {
