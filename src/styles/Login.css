@@ -1,0 +1,77 @@
+/* Container for the entire authentication view */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #dadfe6; /* Light gray background */
+}
+
+/* Header styling */
+.auth-container h1 {
+  margin-bottom: 20px;
+  font-size: 2rem; /* Larger font size for the header */
+  color: #333; /* Dark text color */
+}
+
+/* Error message styling */
+.error-message {
+  color: red; /* Red text color for error messages */
+  margin-bottom: 15px; /* Space below the error message */
+}
+
+/* Form styling */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px; /* Fixed width for the form */
+  padding: 20px; /* Inner spacing for the form */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: white; /* White background for the form */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Input field styling */
+.auth-form input {
+  margin-bottom: 15px; /* Space between input fields */
+  padding: 10px; /* Inner padding for inputs */
+  border: 1px solid #ccc; /* Light border for inputs */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 1rem; /* Font size for input text */
+}
+
+/* Button styling */
+.auth-form button {
+  padding: 10px; /* Inner padding for button */
+  background-color: #32557a; /* Primary color (blue) */
+  color: white; /* Text color for button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners for button */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background change */
+}
+
+/* Button hover effect */
+.auth-form button:hover {
+  background-color: #34669c; /* Darker blue on hover */
+}
+
+/* Sign-up link styling */
+.auth-container p {
+  margin-top: 20px; /* Space above the paragraph */
+  font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+/* Link styling */
+.auth-container a {
+  color: #34669c; /* Link color */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Link hover effect */
+.auth-container a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
