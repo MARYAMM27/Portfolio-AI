@@ -1,7 +1,7 @@
-// FileUpload.js
 import React, { useState } from 'react';
-import { storage } from '../firebaseConfig'; // Adjust import based on your structure
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import PropTypes from 'prop-types'; // Import prop-types
+import { storage } from '../firebaseConfig'; // Adjust import based on your structure
 
 const FileUpload = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
@@ -28,14 +28,16 @@ const FileUpload = ({ onFileUpload }) => {
       const fileURL = await getDownloadURL(storageRef); // Get the download URL
 
       // Call the parent component function to handle the uploaded file data
-      onFileUpload({ title, description, hyperlink, fileURL });
+      onFileUpload({
+        title, description, hyperlink, fileURL,
+      });
       setFile(null); // Clear the file input
       setTitle(''); // Clear title
       setDescription(''); // Clear description
       setHyperlink(''); // Clear hyperlink
       setError('');
     } catch (uploadError) {
-      setError('Error uploading file: ' + uploadError.message);
+      setError(`Error uploading file: ${uploadError.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -53,6 +55,10 @@ const FileUpload = ({ onFileUpload }) => {
       {error && <p className="error-message">{error}</p>}
     </div>
   );
+};
+
+FileUpload.propTypes = {
+  onFileUpload: PropTypes.func.isRequired,
 };
 
 export default FileUpload;

@@ -80,7 +80,7 @@ const AdminPanel = ({ cvData, setCvData }) => {
     // Update the form data with the new file
     setFormData((prevFormData) => {
       const updatedProjects = [...prevFormData.projects];
-  
+
       const projectIndex = updatedProjects.findIndex((project) => project.title === fileData.title);
       if (projectIndex > -1) {
         updatedProjects[projectIndex].files.push({
@@ -95,19 +95,18 @@ const AdminPanel = ({ cvData, setCvData }) => {
           files: [{ ...fileData, isImage: fileData.fileURL.endsWith('.jpg') || fileData.fileURL.endsWith('.png') || fileData.fileURL.endsWith('.jpeg') }],
         });
       }
-  
+
       return { ...prevFormData, projects: updatedProjects };
     });
-  
+
     // Update Firestore after adding a new project
     const docRef = doc(db, 'cvData', 'cvData');
     await updateDoc(docRef, { projects: formData.projects });
-  
+
     // Set a success message for file upload
     setSuccessMessage('File uploaded successfully!');
     setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
   };
-  
 
   // Handle file deletion
   const handleDeleteFile = (projectIndex, fileIndex) => {
