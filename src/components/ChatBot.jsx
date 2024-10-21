@@ -122,18 +122,17 @@ const ChatBot = () => {
     experience: () => {
       if (Array.isArray(cvData?.experiences) && cvData.experiences.length > 0) {
         const experienceDetails = cvData.experiences
-          .map((experience) => {
+          .map((experience, index) => {
             const {
               jobTitle, company, startDate, endDate,
             } = experience;
-            return `${jobTitle || 'N/A'} at ${company || 'N/A'} from ${startDate || 'N/A'} to ${endDate || 'N/A'}`;
+            return `${index + 1}. ${jobTitle || 'N/A'} at ${company || 'N/A'} from ${startDate || 'N/A'} to ${endDate || 'N/A'}`;
           })
           .join('\n');
         return `My professional experience includes:\n${experienceDetails}.`;
       }
       return 'Experience data is currently unavailable.';
     },
-
     projects: () => {
       // Retrieve the projects from localStorage (or replace this with your fetch logic)
       const storedProjects = localStorage.getItem('projects');
@@ -152,7 +151,7 @@ const ChatBot = () => {
           <strong>Uploaded File:</strong> <a href="${project.fileURL}" target="_blank" rel="noopener noreferrer">${project.fileName}</a>`;
         }).join('\n\n');
 
-        return `I am skilled in various projects, some of which are more fascinating, also these projects highlight my domain expertise:\n\n${projectDetails}`;
+        return `I am skilled in various projects, some of are more fascinating also these projects highlight my domain expertise:\n\n${projectDetails}`;
       }
 
       return 'No projects available.';
@@ -225,7 +224,7 @@ const ChatBot = () => {
                 <ul className="skills-list">
                   {Array.isArray(cvData?.skills) && cvData.skills.length > 0 ? (
                     cvData.skills.map((skill) => (
-                      <li key={skill}>{skill || 'No skills available.'}</li>
+                      <li key={skill}>{skill || 'No skills available.'}</li> // Use skill as key
                     ))
                   ) : (
                     <li>No skills listed.</li>
@@ -233,58 +232,87 @@ const ChatBot = () => {
                 </ul>
               </div>
 
-              <button type="button" onClick={toggleAdminPanel} className="admin-button">
-                <FontAwesomeIcon icon={faCog} />
-                {' '}
-                Admin
-              </button>
+              <div className="sidebar-section">
+                <p><strong>Experience:</strong></p>
+                <ul className="experience-list">
+                  {Array.isArray(cvData?.experiences) && cvData.experiences.length > 0 ? (
+                    cvData.experiences.map((exp) => (
+                      <li key={exp.id || `${exp.jobTitle}-${exp.company}-${exp.startDate}`}>
+                        {' '}
+                        {/* Use exp.id or a unique string as key */}
+                        {`${exp.jobTitle || 'N/A'} at ${exp.company || 'N/A'} (${exp.startDate || 'N/A'} - ${exp.endDate || 'N/A'})`}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No experience listed.</li>
+                  )}
+                </ul>
+              </div>
+
+              <div className="sidebar-section">
+                <p><strong>Education:</strong></p>
+                <ul className="education-list">
+                  <li>{cvData?.education || 'N/A'}</li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="chat-window" ref={chatWindowRef}>
-            {messages.map((msg) => (
-              <div key={msg.id} className={`message ${msg.sender}`} dangerouslySetInnerHTML={{ __html: msg.text }} />
-            ))}
+          <div className="chatbot-main">
+            <div className="chat-window" ref={chatWindowRef}>
+              {messages.map((msg) => (
+                <div key={msg.id} className={`message ${msg.sender}`} dangerouslySetInnerHTML={{ __html: msg.text }} />
+              ))}
+            </div>
+
+            <div className="predefined-tags">
+              {predefinedTags.map((tag) => (
+                <button
+                  key={tag.id}
+                  type="button" // Added type attribute
+                  onClick={() => handleTagClick(tag.query)}
+                  className="tag-button glow-circle"
+                  aria-label={tag.label}
+                >
+                  <FontAwesomeIcon icon={tag.icon} />
+                  {tag.label}
+                </button>
+
+              ))}
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault(); // Prevent default form behavior
+                handleSubmit(input); // Submit the message
+              }}
+              className="input-form"
+            >
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask me about my portfolio..."
+                className="chat-input"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault(); // Prevent new line on enter
+                    handleSubmit(input); // Submit the message
+                  }
+                }}
+              />
+              <button type="submit" className="send-button" aria-label="Send">
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </button>
+            </form>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault(); // Prevent default form behavior
-              handleSubmit(input); // Submit the message
-            }}
-            className="input-form"
-          >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me about my portfolio..."
-              className="chat-input"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault(); // Prevent new line on enter
-                  handleSubmit(input); // Submit the message
-                }
-              }}
-            />
-            <button type="submit" className="send-button" aria-label="Send">
-              <FontAwesomeIcon icon={faPaperPlane} />
+          <div className="admin-toggle">
+            <button type="button" onClick={toggleAdminPanel} className="admin-button">
+              <FontAwesomeIcon icon={faCog} />
+              {' '}
+              Admin
             </button>
-          </form>
-
-          <div className="tag-list">
-            {predefinedTags.map((tag) => (
-              <button
-                key={tag.id}
-                type="button" // Ensure all buttons have an explicit type
-                onClick={() => handleTagClick(tag.query)}
-                className="tag-button"
-              >
-                <FontAwesomeIcon icon={tag.icon} />
-                {' '}
-                {tag.label}
-              </button>
-            ))}
           </div>
         </div>
       )}
