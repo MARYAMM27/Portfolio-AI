@@ -1,0 +1,68 @@
+.personal-info-container {
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  padding: 20px; /* Add some padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h2 {
+  margin-bottom: 20px; /* Space below the heading */
+}
+
+.info-field {
+  display: flex; /* Flexbox layout for alignment */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 15px; /* Space between fields */
+}
+
+label {
+  width: 100px; /* Fixed width for labels */
+  margin-right: 10px; /* Space between label and input */
+  font-weight: bold; /* Bold labels */
+}
+
+.info-input {
+  flex: 1; /* Input takes remaining space */
+  padding: 10px; /* Padding inside input */
+  border: 1px solid grey; /* Grey border */
+  border-radius: 4px; /* Slightly rounded corners */
+  outline: none; /* Remove outline */
+  transition: border-color 0.3s; /* Smooth transition for border */
+  min-width: 250px; /* Minimum width for input fields */
+  min-height: 40px; /* Increased height for input fields */
+}
+
+.info-input:focus {
+  border-color: black; /* Change border color on focus */
+}
+
+.update-button {
+  margin-top: 20px; /* Space above the button */
+  padding: 10px 15px; /* Button padding */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: black; /* Black background for button */
+  color: white; /* White text for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-weight: bold; /* Bold button text */
+  transition: background-color 0.3s; /* Smooth transition for background */
+}
+
+.update-button:hover {
+  background-color: grey; /* Change to grey on hover */
+}
+
+.success-message {
+  color: green; /* Color for success messages */
+}
+
+.error-message {
+  color: red; /* Color for error messages */
+}
+
+.admin-content {
+  padding: 20px;
+  width: 100%; /* Ensure full width */
+  flex-grow: 1; /* Allow content to take available space */
+}

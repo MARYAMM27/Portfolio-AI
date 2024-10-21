@@ -2,154 +2,129 @@
 
 .admin-panel {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  max-width: 600px;
-  height: 100vh;
-  margin: auto;
-  padding: 30px;
-  background-color: #fff; /* Light background for a clean look */
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
-  overflow-y: auto; /* Scrollable for longer content */
+  height: 100vh; /* Full height for the admin panel */
+  background-color: #f8f9fa; /* Light grey for background */
+  transition: background-color 0.3s, color 0.3s; /* Move this to avoid duplicates */
 }
 
-.admin-panel h2 {
-  color: #333; /* Darker color for better contrast */
-  font-size: 2rem; /* Increased font size for headers */
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 700; /* Bold for emphasis */
-  letter-spacing: 0.5px; /* Slight letter spacing for readability */
+/* Navbar styles */
+.navbar {
+  width: 250px; /* Expanded width */
+  background-color: #343a40; /* Dark grey for navbar */
+  color: white;
+  transition: width 0.3s ease; /* Smooth transition */
+  overflow: hidden;
 }
 
-.admin-panel .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.5rem; /* More space between fields */
-  width: 100%;
+.navbar.collapsed {
+  width: 60px; /* Width when collapsed */
 }
 
-.admin-panel label {
-  font-size: 1rem;
-  color: #495057;
-  margin-bottom: 0.5rem; /* Reduced margin for cleaner look */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.admin-panel input[type="text"],
-.admin-panel input[type="email"],
-.admin-panel input[type="password"],
-.admin-panel textarea {
-  width: 100%;
-  padding: 12px; /* More padding for comfortable input */
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  font-size: 1rem;
-  color: #495057;
-  transition: border-color 0.3s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for input fields */
+.navbar ul li {
+  display: flex; /* Use flexbox for better alignment */
+  align-items: center; /* Center items vertically */
+  padding: 15px;
+  border-bottom: 1px solid #495057; /* Medium grey for borders */
 }
 
-.admin-panel input:focus,
-.admin-panel textarea:focus {
-  border-color: #007bff; /* Blue color for focus */
-  outline: none;
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  display: flex; /* Make the entire area clickable */
+  align-items: center; /* Center icon and text vertically */
 }
 
-.admin-panel button {
-  width: 100%;
-  padding: 12px; /* Increased padding for buttons */
-  background-color: #007bff; /* Blue background for primary actions */
+.navbar ul li a:hover {
+  background-color: #495057; /* Hover effect */
+}
+
+.toggle-nav {
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.logout-button {
+  background-color: #dc3545; /* Red for logout button */
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Added transform for hover */
-}
-
-.admin-panel button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: translateY(-2px); /* Subtle lift effect on hover */
-}
-
-/* Styles for error and success messages */
-.admin-panel .error-message,
-.admin-panel .success-message {
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 1rem; /* Space between messages */
-  width: 100%; /* Full width for messages */
-}
-
-.admin-panel .error-message {
-  color: #d9534f; /* Red for errors */
-  background-color: #f8d7da; /* Light red background */
-}
-
-.admin-panel .success-message {
-  color: #28a745; /* Green for success */
-  background-color: #d4edda; /* Light green background */
-}
-
-.admin-toggle-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   padding: 10px 15px;
-  background-color: #0056b3; /* Darker blue for toggle */
-  color: #fff;
-  border: none;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.9em;
-  z-index: 1000;
-  transition: background-color 0.3s, transform 0.3s; /* Added transform */
+  margin: 15px;
+  width: calc(100% - 30px);
 }
 
-.admin-toggle-button:hover {
-  background-color: #004494; /* Even darker blue on hover */
-  transform: scale(1.05); /* Slightly larger on hover */
+/* Success and error messages */
+.success-message {
+  color: #28a745; /* Green shade for success messages */
 }
 
+.error-message {
+  color: #dc3545; /* Red shade for error messages */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .admin-panel {
-    width: 95%; /* Slightly wider for smaller screens */
-    padding: 20px; /* Reduced padding for smaller screens */
-  }
-
-  .admin-panel h2 {
-    font-size: 1.75rem; /* Smaller header size */
-  }
-
-  .admin-toggle-button {
-    padding: 8px 16px;
-    font-size: 0.8rem; /* Smaller toggle button size */
+  .navbar {
+    width: 200px; /* Adjust width for smaller screens */
   }
 }
 
-/* Styles for spacing between the buttons */
-.admin-panel form button[type="submit"] {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+/* Admin content styles */
+.admin-content {
+  padding: 20px; /* Ensure there's some padding */
+  flex: 1; /* Allow this to grow and fill the available space */
 }
 
-.admin-panel button[type="button"] {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 8px 12px; /* Adjusted padding for button */
-  background-color: #005075; /* Darker teal for buttons */
+.admin-panel .admin-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Styles for welcome message */
+.admin-panel h1,
+.admin-panel p {
+  margin: 20px 0;
+}
+
+/* Default styles for light and dark themes */
+.admin-panel.light-theme {
+  background-color: white;
+  color: black; /* Text color for light background */
+}
+
+.admin-panel.dark-theme {
+  background-color: black;
+  color: white; /* Text color for dark background */
+}
+
+/* Theme toggle button styles */
+.theme-toggle-button {
+  background: none;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
-  color: white; /* White text for contrast */
+  font-size: 1.5rem; /* Adjust size as needed */
+  color: inherit; /* Inherit color from parent for light/dark themes */
+  margin-left: auto; /* Push the button to the right */
 }
 
-.admin-panel button[type="button"]:hover {
-  background-color: #004053; /* Darker teal on hover */
+.theme-toggle-button:hover {
+  opacity: 0.8; /* Add hover effect */
+}
+
+.content-scroll {
+  max-height: 500px; /* Adjust as needed to limit height */
+  overflow-y: auto; /* Enables vertical scrolling */
+  margin-top: 20px; /* Space above the scrollable area */
+  padding: 10px; /* Add padding for a better appearance */
+  border: 1px solid #ddd; /* Optional: Add border for visibility */
+  border-radius: 8px; /* Optional: Rounded corners */
 }

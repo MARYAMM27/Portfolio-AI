@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import PropTypes from 'prop-types'; // Import prop-types
+import PropTypes from 'prop-types';
 import { storage } from '../firebaseConfig'; // Adjust import based on your structure
+import '../styles/FileUpload.css'; // Import the CSS file for FileUpload styles
 
 const FileUpload = ({ onFileUpload }) => {
   const [file, setFile] = useState(null);
@@ -21,20 +22,26 @@ const FileUpload = ({ onFileUpload }) => {
       return;
     }
 
-    const storageRef = ref(storage, `uploads/${file.name}`); // Adjust the path as necessary
+    const storageRef = ref(storage, `uploads/${file.name}`);
     setIsLoading(true);
     try {
       await uploadBytes(storageRef, file);
-      const fileURL = await getDownloadURL(storageRef); // Get the download URL
+      const fileURL = await getDownloadURL(storageRef);
 
-      // Call the parent component function to handle the uploaded file data
+      // Pass the uploaded file data to the parent component
       onFileUpload({
-        title, description, hyperlink, fileURL,
+        title,
+        description,
+        hyperlink,
+        fileURL,
+        fileName: file.name, // Send file name
       });
-      setFile(null); // Clear the file input
-      setTitle(''); // Clear title
-      setDescription(''); // Clear description
-      setHyperlink(''); // Clear hyperlink
+
+      // Clear form after successful upload
+      setFile(null);
+      setTitle('');
+      setDescription('');
+      setHyperlink('');
       setError('');
     } catch (uploadError) {
       setError(`Error uploading file: ${uploadError.message}`);
@@ -44,12 +51,40 @@ const FileUpload = ({ onFileUpload }) => {
   };
 
   return (
-    <div>
-      <input type="text" placeholder="Project Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-      <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <input type="text" placeholder="Hyperlink" value={hyperlink} onChange={(e) => setHyperlink(e.target.value)} />
-      <input type="file" onChange={handleFileChange} required />
-      <button type="button" onClick={handleUpload} disabled={isLoading}>
+    <div className="file-upload-container">
+      <input
+        type="text"
+        className="file-upload-input"
+        placeholder="Project Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <textarea
+        className="file-upload-textarea"
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <input
+        type="text"
+        className="file-upload-input"
+        placeholder="Hyperlink"
+        value={hyperlink}
+        onChange={(e) => setHyperlink(e.target.value)}
+      />
+      <input
+        type="file"
+        className="file-upload-input"
+        onChange={handleFileChange}
+        required
+      />
+      <button
+        type="button"
+        className="file-upload-button"
+        onClick={handleUpload}
+        disabled={isLoading}
+      >
         {isLoading ? 'Uploading...' : 'Upload File'}
       </button>
       {error && <p className="error-message">{error}</p>}

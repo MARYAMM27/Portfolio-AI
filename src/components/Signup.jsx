@@ -30,7 +30,7 @@ const Signup = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/'); // Redirect to login after successful signup
+      navigate('/'); // Redirect to home after successful signup
     } catch (error) {
       setError(error.message);
     }
@@ -60,7 +60,9 @@ const Signup = () => {
       <p>
         Already have an account?
         {' '}
-        <Link to="/">Login</Link>
+        <Link to="/login">Login</Link>
+        {' '}
+        {/* Ensure this path matches your login route */}
       </p>
     </div>
   );

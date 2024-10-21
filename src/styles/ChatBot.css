@@ -1,8 +1,8 @@
 /* General Body Styling */
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
 }
 
 /* Full-page Chat Interface */
@@ -11,7 +11,7 @@ body {
   height: 100vh;
   width: 100vw;
   position: relative;
-  background-color: #000; /* Black background */
+  background-color: #f7f7f7; /* Light gray background */
   padding: 0;
 }
 
@@ -23,11 +23,11 @@ body {
 
 /* Bot Avatar */
 .bot-avatar {
-  background-color: #333; /* Dark gray background for bot avatar */
+  background-color: #f0f0f0; /* Light gray background for bot avatar */
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Subtle white glow */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Subtle black glow */
   margin: auto;
   position: relative;
 }
@@ -39,17 +39,19 @@ body {
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 5px #fff; }
-  50% { box-shadow: 0 0 20px #fff; }
+  0% { box-shadow: 0 0 5px #000; }
+  50% { box-shadow: 0 0 20px #000; }
 }
 
 /* Sidebar Styling */
 .sidebar-extended {
-  width: 250px;
-  background-color: #222; /* Darker gray for sidebar */
+  width: 250px; /* Fixed width for sidebar */
+  background-color: #fff; /* White for sidebar */
   padding: 20px;
-  overflow-y: auto;
-  color: #fff; /* White text */
+  overflow-y: auto; /* Allow vertical scrolling if content overflows */
+  color: #000; /* Black text */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Subtle shadow to the right */
+  transition: transform 0.3s ease; /* Smooth transition for sidebar */
 }
 
 .sidebar-info {
@@ -57,15 +59,17 @@ body {
 }
 
 .profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 100px; /* Profile image size */
+  height: 100px; /* Profile image size */
+  border-radius: 50%; /* Circular profile image */
+  margin-bottom: 15px; /* Spacing below image */
 }
 
+/* Skills List */
 .skills-list {
   list-style: none;
   padding: 0;
-  color: #ccc; /* Light gray for skill list */
+  color: #333; /* Dark gray for skill list */
 }
 
 /* Main Chatbot Area */
@@ -74,7 +78,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #000; /* Black background */
+  background-color: #fff; /* White background */
 }
 
 /* Chat Window */
@@ -82,10 +86,10 @@ body {
   flex-grow: 1;
   padding: 10px;
   overflow-y: auto;
-  background-color: #111; /* Very dark gray */
-  border: 1px solid #333; /* Dark gray border */
+  background-color: #fff; /* White background */
+  border: 1px solid #ccc; /* Light gray border */
   border-radius: 8px;
-  color: #fff; /* White text */
+  color: #000; /* Black text */
 }
 
 /* Message styles */
@@ -112,20 +116,20 @@ body {
 }
 
 .message.user {
-  background-color: #333; /* Dark gray for user messages */
+  background-color: #e0e0e0; /* Light gray for user messages */
   align-self: flex-end;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .message.bot {
-  background-color: #222; /* Slightly lighter gray for bot messages */
+  background-color: #f0f0f0; /* Slightly lighter gray for bot messages */
   align-self: flex-start;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .message:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Chat Input */
@@ -134,8 +138,8 @@ body {
   align-items: center;
   margin-top: 10px;
   padding: 10px;
-  border-top: 2px solid #444; /* Dark border */
-  background-color: #000; /* Black background */
+  border-top: 2px solid #ccc; /* Light gray border */
+  background-color: #f7f7f7; /* Light gray background */
   border-radius: 30px;
   gap: 10px;
 }
@@ -145,9 +149,9 @@ body {
   padding: 12px;
   font-size: 18px;
   border-radius: 25px;
-  border: 2px solid #444; /* Dark border */
-  background-color: #111; /* Dark input background */
-  color: #fff; /* White text */
+  border: 2px solid #ccc; /* Light gray border */
+  background-color: #fff; /* White input background */
+  color: #000; /* Black text */
   outline: none;
   transition: box-shadow 0.3s ease;
   margin-right: 10px;
@@ -155,12 +159,12 @@ body {
 
 .chat-input:focus {
   border-color: #666; /* Lighter gray border on focus */
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .send-button {
-  background-color: #444; /* Dark gray button */
-  color: white;
+  background-color: #ccc; /* Light gray button */
+  color: black;
   border: none;
   border-radius: 20px;
   padding: 10px 15px;
@@ -169,7 +173,7 @@ body {
 }
 
 .send-button:hover {
-  background-color: #555; /* Slightly lighter on hover */
+  background-color: #bbb; /* Slightly darker on hover */
   transform: translateY(-2px);
 }
 
@@ -190,8 +194,8 @@ body {
   gap: 8px;
   padding: 10px 15px;
   border-radius: 20px;
-  background-color: #333; /* Dark gray for tag buttons */
-  color: white;
+  background-color: #e0e0e0; /* Light gray for tag buttons */
+  color: black;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -199,7 +203,7 @@ body {
 }
 
 .tag-button:hover {
-  background-color: #555; /* Lighter gray on hover */
+  background-color: #ccc; /* Darker gray on hover */
   transform: translateY(-3px);
 }
 
@@ -213,8 +217,8 @@ body {
   top: 20px;
   right: 20px;
   z-index: 10;
-  background-color: #444; /* Dark gray for toggle button */
-  color: white;
+  background-color: #ccc; /* Light gray for toggle button */
+  color: black;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -227,7 +231,7 @@ body {
 }
 
 .admin-toggle-button:hover {
-  background-color: #666; /* Lighter gray on hover */
+  background-color: #bbb; /* Slightly darker gray on hover */
   transform: scale(1.05);
 }
 
@@ -253,7 +257,7 @@ body {
 }
 
 .chat-window::-webkit-scrollbar-thumb {
-  background: #444; /* Dark gray scrollbar */
+  background: #ccc; /* Light gray scrollbar */
   border-radius: 10px;
 }
 
@@ -285,4 +289,32 @@ html {
   .chatbot-container {
     padding: 10px;
   }
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  margin-bottom: 20px; /* Space between sections */
+}
+
+/* Lists */
+.skills-list,
+.experience-list,
+.email-list,
+.education-list {
+  list-style-type: disc; /* Use disc bullets */
+  padding-left: 20px; /* Indentation for bullets */
+  color: #333; /* Dark gray for skill and experience list */
+  margin: 10px 0; /* Margin for spacing between sections */
+}
+
+/* Styling for each section title */
+.sidebar-section p {
+  font-size: 18px; /* Slightly larger font for section titles */
+  margin-bottom: 5px; /* Spacing below section titles */
+}
+
+/* Individual list item styling */
+.sidebar-section li {
+  margin-bottom: 5px; /* Space between list items */
+  line-height: 1.5; /* Increased line height for readability */
 }

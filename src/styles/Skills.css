@@ -1,0 +1,79 @@
+/* Skills.css */
+
+/* Container for the skills section */
+.skills-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc; /* Light border around the container */
+  border-radius: 8px; /* Rounded corners */
+  background-color: white; /* White background for the form */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Info field styling */
+.info-field {
+  margin-bottom: 15px; /* Space between fields */
+}
+
+.info-field label {
+  display: block; /* Make labels block elements */
+  margin-bottom: 5px; /* Space between label and input */
+  color: #333; /* Dark text color */
+}
+
+.info-input {
+  width: 100%; /* Full width for inputs */
+  padding: 10px; /* Inner padding */
+  border: 1px solid #ccc; /* Light border for inputs */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 1rem; /* Font size for input text */
+}
+
+/* Button styling */
+.add-skill-button,
+.update-button {
+  padding: 10px 15px; /* Inner padding for buttons */
+  background-color: #32557a; /* Primary color (blue) */
+  color: white; /* Text color for buttons */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background change */
+  margin-right: 10px; /* Space between buttons */
+}
+
+/* Button hover effect */
+.add-skill-button:hover,
+.update-button:hover {
+  background-color: #34669c; /* Darker blue on hover */
+}
+
+/* Success and error message styles */
+.success-message {
+  color: #28a745; /* Green for success messages */
+  margin-top: 10px; /* Space above the message */
+}
+
+.error-message {
+  color: #dc3545; /* Red for error messages */
+  margin-top: 10px; /* Space above the message */
+}
+
+/* Delete button styling */
+.delete-skill-button {
+  padding: 8px 12px; /* Inner padding for the delete button */
+  background-color: #dc3545; /* Red background for delete button */
+  color: white; /* White text for delete button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 0.9rem; /* Font size for delete button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-left: 10px; /* Space between input and button */
+  transition: background-color 0.3s; /* Smooth background change */
+}
+
+/* Button hover effect */
+.delete-skill-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
