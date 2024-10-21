@@ -1,0 +1,122 @@
+/* Container for the entire authentication view */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #f8f9fa; /* Light gray background matching AdminPanel */
+  position: relative; /* To position the cross button relative to this container */
+}
+
+/* Header styling */
+.auth-container h1 {
+  margin-bottom: 20px;
+  font-size: 2rem; /* Larger font size for the header */
+  color: #333; /* Dark text color */
+}
+
+/* Error message styling */
+.error-message {
+  color: #dc3545; /* Consistent red for error messages */
+  margin-bottom: 15px; /* Space below the error message */
+}
+
+/* Form styling */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px; /* Fixed width for the form */
+  padding: 20px; /* Inner spacing for the form */
+  border: 1px solid #ced4da; /* Light border matching AdminPanel */
+  border-radius: 8px; /* Rounded corners */
+  background-color: white; /* White background for the form */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Input field styling */
+.auth-form input {
+  margin-bottom: 15px; /* Space between input fields */
+  padding: 10px; /* Inner padding for inputs */
+  border: 1px solid #ced4da; /* Light border for inputs */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 1rem; /* Font size for input text */
+}
+
+/* Button styling */
+.auth-form button {
+  padding: 10px; /* Inner padding for button */
+  background-color: #007bff; /* Primary color (blue) matching AdminPanel */
+  color: white; /* Text color for button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners for button */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background change */
+}
+
+/* Button hover effect */
+.auth-form button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Sign-up link styling */
+.auth-container p {
+  margin-top: 20px; /* Space above the paragraph */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  color: #333; /* Dark text color for consistency */
+}
+
+/* Link styling */
+.auth-container a {
+  color: #007bff; /* Link color matching AdminPanel */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Link hover effect */
+.auth-container a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Dark theme styles for authentication */
+.auth-container.dark-theme {
+  background-color: #343a40; /* Dark background for dark theme */
+  color: white; /* Text color for dark theme */
+}
+
+.auth-form.dark-theme {
+  background-color: #495057; /* Darker background for form in dark theme */
+  border: 1px solid #6c757d; /* Darker border for form in dark theme */
+}
+
+.auth-form input.dark-theme {
+  background-color: #6c757d; /* Darker input background for dark theme */
+  color: white; /* Text color for inputs */
+}
+
+.auth-form button.dark-theme {
+  background-color: #007bff; /* Bright blue for buttons in dark theme */
+}
+
+.auth-form button.dark-theme:hover {
+  background-color: #0056b3; /* Darker blue on hover in dark theme */
+}
+
+.auth-container a.dark-theme {
+  color: #80bdff; /* Lighter blue for links in dark theme */
+}
+
+/* Close (cross) button styling */
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-icon:hover {
+  color: #f00; /* Change to red on hover */
+}

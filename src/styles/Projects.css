@@ -1,0 +1,112 @@
+/* Projects.css */
+
+/* Container for the projects section */
+.projects-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input fields and buttons styling */
+.project-inputs {
+  margin-bottom: 20px;
+}
+
+.project-input,
+.project-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.add-button {
+  padding: 10px 15px;
+  background-color: #32557a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #34669c;
+}
+
+/* Scrollable projects list */
+.projects-list {
+  max-height: 300px; /* Adjust based on how tall you want the scrollable area to be */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Optional: Add border for visibility */
+  padding: 10px; /* Optional: Add some padding */
+  margin-top: 15px; /* Space between the heading and the project list */
+  border-radius: 8px; /* Optional: Rounded corners */
+}
+
+/* Individual project item styling */
+.project-item {
+  background-color: #fff; /* Background color for each project item */
+  padding: 15px; /* Space inside each project item */
+  border: 1px solid #ddd; /* Border around each project item */
+  border-radius: 8px; /* Rounded corners for project items */
+  margin-bottom: 10px; /* Space between project items */
+  text-align: center; /* Center text within project items */
+}
+
+.project-item h4 {
+  margin: 0;
+}
+
+/* Delete button styling */
+.delete-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Success and error message styles */
+.success-message {
+  color: #28a745;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 10px;
+}
+
+/* Slider controls */
+.slider-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 15px;
+}
+
+.slider-controls button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.slider-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

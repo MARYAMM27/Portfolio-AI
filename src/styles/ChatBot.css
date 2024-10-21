@@ -1,0 +1,320 @@
+/* General Body Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+}
+
+/* Full-page Chat Interface */
+.chatbot-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: #f7f7f7; /* Light gray background */
+  padding: 0;
+}
+
+.chatbot-wrapper {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* Bot Avatar */
+.bot-avatar {
+  background-color: #f0f0f0; /* Light gray background for bot avatar */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Subtle black glow */
+  margin: auto;
+  position: relative;
+}
+
+.bot-avatar img {
+  width: 100%;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px #000; }
+  50% { box-shadow: 0 0 20px #000; }
+}
+
+/* Sidebar Styling */
+.sidebar-extended {
+  width: 250px; /* Fixed width for sidebar */
+  background-color: #fff; /* White for sidebar */
+  padding: 20px;
+  overflow-y: auto; /* Allow vertical scrolling if content overflows */
+  color: #000; /* Black text */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Subtle shadow to the right */
+  transition: transform 0.3s ease; /* Smooth transition for sidebar */
+}
+
+.sidebar-info {
+  margin-top: 20px;
+}
+
+.profile-image {
+  width: 100px; /* Profile image size */
+  height: 100px; /* Profile image size */
+  border-radius: 50%; /* Circular profile image */
+  margin-bottom: 15px; /* Spacing below image */
+}
+
+/* Skills List */
+.skills-list {
+  list-style: none;
+  padding: 0;
+  color: #333; /* Dark gray for skill list */
+}
+
+/* Main Chatbot Area */
+.chatbot-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff; /* White background */
+}
+
+/* Chat Window */
+.chat-window {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fff; /* White background */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px;
+  color: #000; /* Black text */
+}
+
+/* Message styles */
+.message {
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 20px;
+  max-width: 75%;
+  font-size: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  background-color: #e0e0e0; /* Light gray for user messages */
+  align-self: flex-end;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.message.bot {
+  background-color: #f0f0f0; /* Slightly lighter gray for bot messages */
+  align-self: flex-start;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Chat Input */
+.input-form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 2px solid #ccc; /* Light gray border */
+  background-color: #f7f7f7; /* Light gray background */
+  border-radius: 30px;
+  gap: 10px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: 2px solid #ccc; /* Light gray border */
+  background-color: #fff; /* White input background */
+  color: #000; /* Black text */
+  outline: none;
+  transition: box-shadow 0.3s ease;
+  margin-right: 10px;
+}
+
+.chat-input:focus {
+  border-color: #666; /* Lighter gray border on focus */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.send-button {
+  background-color: #ccc; /* Light gray button */
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.send-button:hover {
+  background-color: #bbb; /* Slightly darker on hover */
+  transform: translateY(-2px);
+}
+
+/* Predefined tags section */
+.predefined-tags {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+  padding: 10px 0;
+  background-color: transparent;
+}
+
+.tag-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #e0e0e0; /* Light gray for tag buttons */
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.tag-button:hover {
+  background-color: #ccc; /* Darker gray on hover */
+  transform: translateY(-3px);
+}
+
+.tag-icon {
+  font-size: 16px;
+}
+
+/* Admin Toggle Button */
+.admin-toggle-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background-color: #ccc; /* Light gray for toggle button */
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.admin-toggle-button:hover {
+  background-color: #bbb; /* Slightly darker gray on hover */
+  transform: scale(1.05);
+}
+
+.admin-icon {
+  font-size: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chatbot-container {
+    flex-direction: column;
+  }
+
+  .admin-toggle-button {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Scrollbar styles */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: #ccc; /* Light gray scrollbar */
+  border-radius: 10px;
+}
+
+/* Profile Section */
+.profile-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Full viewport setup */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+/* Adjusting margins and padding for different screen sizes */
+@media (max-aspect-ratio: 4/3) {
+  .chatbot-container {
+    padding: 20px;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .chatbot-container {
+    padding: 10px;
+  }
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  margin-bottom: 20px; /* Space between sections */
+}
+
+/* Lists */
+.skills-list,
+.experience-list,
+.email-list,
+.education-list {
+  list-style-type: disc; /* Use disc bullets */
+  padding-left: 20px; /* Indentation for bullets */
+  color: #333; /* Dark gray for skill and experience list */
+  margin: 10px 0; /* Margin for spacing between sections */
+}
+
+/* Styling for each section title */
+.sidebar-section p {
+  font-size: 18px; /* Slightly larger font for section titles */
+  margin-bottom: 5px; /* Spacing below section titles */
+}
+
+/* Individual list item styling */
+.sidebar-section li {
+  margin-bottom: 5px; /* Space between list items */
+  line-height: 1.5; /* Increased line height for readability */
+}
