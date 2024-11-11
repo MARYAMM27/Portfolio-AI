@@ -6,6 +6,7 @@
   margin-bottom: 0;
   margin-left: auto;
 }
+
 .project-slider {
   position: relative;
   margin-top: 0;
@@ -18,6 +19,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .slider-image-container {
   position: relative;
   width: 100%;
