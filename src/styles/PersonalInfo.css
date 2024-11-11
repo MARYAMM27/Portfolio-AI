@@ -1,0 +1,96 @@
+/* Personal Info Page Styles */
+.personal-info-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* CV Title Styles */
+.cv-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/* Input and Field Styles */
+.cv-info-field {
+  margin-bottom: 15px;
+}
+
+.cv-info-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Button Styles */
+.cv-update-button,
+.cv-cancel-button,
+.cv-action-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.cv-update-button:hover,
+.cv-cancel-button:hover,
+.cv-action-button:hover {
+  background-color: #0056b3; /* Darken color on hover */
+}
+
+/* Entry Details Styles */
+.cv-entry-details {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Entry Title and Content Styles */
+.cv-entry-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.cv-entry-content {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.cv-entry-content h4 {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Success and Error Messages */
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
+/* Profile Picture Styles */
+.profile-pic-preview {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: 10px;
+}
+
+.profile-pic {
+  max-width: 100px;
+  margin-top: 10px;
+}

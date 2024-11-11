@@ -1,0 +1,313 @@
+/* General styles for the chatbot container */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f0f0f5; /* Light background for the chatbot */
+}
+
+/* Loading spinner style */
+.loading-spinner {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  color: #007bff; /* Primary color for loading text */
+}
+
+/* Chatbot wrapper that holds the sidebar and main content */
+.chatbot-wrapper {
+  display: flex;
+  flex-grow: 1;
+  border: 1px solid #ddd; /* Increased border thickness for a more defined edge */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Sidebar extended style with profile image and details */
+.sidebar-extended {
+  width: 230px; /* Fixed width for sidebar */
+  background-color: #2676c5; /* Dark background for sidebar */
+  color: white;
+  padding: 20px;
+  text-align: left; /* Align text to the left for better readability */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.sidebar-extended img {
+  border-radius: 50%;
+  width: 100px; /* Profile image size */
+  height: 100px;
+  margin-bottom: 10px;
+  object-fit: cover; /* Ensure the image fits nicely */
+}
+
+.sidebar-extended h3 {
+  font-size: 22px; /* Increased font size for headings */
+  margin: 10px 0; /* Space above and below the name */
+}
+
+/* Style for the lists in the sidebar */
+.info-list {
+  list-style-type: none; /* Remove default list styling */
+  padding-left: 0; /* Remove padding */
+  margin: 10px 0; /* Add space above and below the list */
+}
+
+.info-list > li {
+  margin-bottom: 10px; /* Space between list items */
+  color: white; /* Text color to match the sidebar theme */
+}
+
+.email-list,
+.education-list {
+  list-style-type: disc; /* Use bullets for email and education */
+  padding-left: 20px; /* Indent the list for better alignment */
+  margin: 5px 0; /* Space above and below the lists */
+}
+
+.email-list li,
+.education-list li {
+  font-size: 14px; /* Font size for email and education items */
+  margin-bottom: 5px; /* Space between items */
+  color: white; /* Change text color to match the sidebar theme */
+}
+
+.skills-list,
+.experience-list {
+  list-style-type: disc; /* Use bullets for skills and experience */
+  padding-left: 20px; /* Indent the list for better alignment */
+  margin: 5px 0; /* Space above and below the lists */
+}
+
+.skills-list li,
+.experience-item {
+  font-size: 14px; /* Font size for skills and experience items */
+  margin-bottom: 5px; /* Space between items */
+  color: white; /* Change text color to match the sidebar theme */
+}
+
+.chatbot-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  overflow: hidden; /* Prevent overflow in the main area */
+}
+
+/* Chat window styling */
+.chat-window {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable scrolling for long messages */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f9fa; /* Light background for chat window */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for chat window */
+}
+
+/* Styling for each message */
+.message {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 100%; /* Allow messages to take full width of chat window */
+  box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+.message.user {
+  background-color: #007bff; /* User message color */
+  color: white;
+  align-self: flex-end; /* Align user messages to the right */
+}
+
+.message.bot {
+  background-color: #e9ecef; /* Bot message color */
+  color: black;
+  align-self: flex-start; /* Align bot messages to the left */
+}
+
+/* Styling for predefined tag buttons */
+.predefined-tags {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.tag-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Primary color for tag buttons */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.tag-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Styling for chat input and send button */
+.input-form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s; /* Transition for input focus */
+}
+
+.chat-input:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  outline: none; /* Remove outline */
+}
+
+.send-button {
+  background-color: #007bff; /* Primary color for send button */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.send-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Admin button styling */
+.admin-button {
+  background-color: #007bff; /* Admin button color */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.admin-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Project carousel and slider styles */
+.project-response {
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.project-response strong {
+  font-size: 18px;
+  color: #333;
+}
+
+.project-response p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.project-response a {
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.project-response a:hover {
+  text-decoration: underline;
+}
+
+.project-carousel {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Carousel container */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-details {
+  margin: 0 20px;
+  text-align: left;
+}
+
+/* Slider container and image styles */
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.slider-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.slider-button {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Project image styling */
+.project-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.image-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.project-response img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Edit and delete button styling */
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
