@@ -1,6 +1,3 @@
-/* Project container styling */
-
-/* Project container styling */
 .projects-container {
   padding: 20px;
   max-width: 900px;
@@ -9,7 +6,6 @@
   margin-bottom: 0;
   margin-left: auto;
 }
-/* Styling for the slider container */
 .project-slider {
   position: relative;
   margin-top: 0;
@@ -22,7 +18,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .slider-image-container {
   position: relative;
   width: 100%;
