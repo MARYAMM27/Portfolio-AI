@@ -1,5 +1,3 @@
-/* Skills.css */
-
 /* Container for the skills section */
 .skills-container {
   margin: 20px;
@@ -10,15 +8,31 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+/* Skill entry styling */
+.skill-entry {
+  padding: 15px; /* Inner padding for each skill entry */
+  margin-bottom: 10px; /* Space between skill entries */
+  border: 1px solid #ccc; /* Light border for each skill entry */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background for skill entries */
+  transition: background-color 0.3s; /* Smooth background change */
+}
+
+/* Skill details styling */
+.skill-details {
+  display: flex; /* Flexbox for layout */
+  justify-content: space-between; /* Space between skill name and buttons */
+  align-items: center; /* Center align buttons vertically */
+}
+
+/* Hover effect for skill entry */
+.skill-entry:hover {
+  background-color: #e6f0ff; /* Light blue on hover */
+}
+
 /* Info field styling */
 .info-field {
   margin-bottom: 15px; /* Space between fields */
-}
-
-.info-field label {
-  display: block; /* Make labels block elements */
-  margin-bottom: 5px; /* Space between label and input */
-  color: #333; /* Dark text color */
 }
 
 .info-input {
@@ -63,17 +77,34 @@
 /* Delete button styling */
 .delete-skill-button {
   padding: 8px 12px; /* Inner padding for the delete button */
-  background-color: #dc3545; /* Red background for delete button */
+  background-color: #dc3545; /* Red color for delete button */
   color: white; /* White text for delete button */
   border: none; /* Remove default border */
   border-radius: 4px; /* Rounded corners */
   font-size: 0.9rem; /* Font size for delete button text */
   cursor: pointer; /* Pointer cursor on hover */
-  margin-left: 10px; /* Space between input and button */
+  transition: background-color 0.3s; /* Smooth background change */
+  margin-left: 10px; /* Space between buttons */
+}
+
+/* Button hover effect for delete button */
+.delete-skill-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Edit button styling */
+.edit-skill-button {
+  padding: 8px 12px; /* Inner padding for the edit button */
+  background-color: #32557a; /* Primary color (blue) */
+  color: white; /* White text for edit button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 0.9rem; /* Font size for edit button text */
+  cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s; /* Smooth background change */
 }
 
-/* Button hover effect */
-.delete-skill-button:hover {
-  background-color: #c82333; /* Darker red on hover */
+/* Button hover effect for edit button */
+.edit-skill-button:hover {
+  background-color: #34669c; /* Darker blue on hover */
 }

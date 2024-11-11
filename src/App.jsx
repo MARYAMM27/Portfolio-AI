@@ -3,6 +3,9 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import ChatBot from './components/ChatBot';
 import AdminPanel from './components/AdminPanel';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 import ProtectedRoute from './components/ProtectedRoutes';
 
 function App() {

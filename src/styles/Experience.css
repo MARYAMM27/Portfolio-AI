@@ -25,28 +25,29 @@
   width: 100%; /* Full width for input fields */
 }
 
-/* Button for adding a new experience */
-.add-experience-button {
+/* Base button styling for consistency */
+.button {
   padding: 10px 15px; /* Inner padding for button */
-  background-color: #32557a; /* Primary color (blue) */
   color: white; /* Text color for buttons */
   border: none; /* Remove default border */
   border-radius: 4px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   margin-top: 10px; /* Space above buttons */
+  width: 100%; /* Set width for all buttons */
   transition: background-color 0.3s; /* Smooth background change */
 }
 
-/* Button for deleting an experience */
+/* Specific button styles */
+.add-experience-button {
+  background-color: #32557a; /* Primary color (blue) */
+}
+
+.update-button {
+  background-color: #28a745; /* Green for update button */
+}
+
 .delete-experience-button {
-  padding: 5px 10px; /* Inner padding for the delete button */
   background-color: #dc3545; /* Red background for delete button */
-  color: white; /* Text color for delete button */
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-left: 10px; /* Space between input and button */
-  transition: background-color 0.3s; /* Smooth background change */
 }
 
 /* Button hover effects */
@@ -54,25 +55,12 @@
   background-color: #34669c; /* Darker blue on hover */
 }
 
-.delete-experience-button:hover {
-  background-color: #c82333; /* Darker red on hover */
-}
-
-/* Button for updating experiences */
-.update-button {
-  padding: 10px 15px; /* Inner padding for button */
-  background-color: #28a745; /* Green for update button */
-  color: white; /* Text color for buttons */
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 10px; /* Space above buttons */
-  transition: background-color 0.3s; /* Smooth background change */
-}
-
-/* Button hover effect */
 .update-button:hover {
   background-color: #218838; /* Darker green on hover */
+}
+
+.delete-experience-button:hover {
+  background-color: #c82333; /* Darker red on hover */
 }
 
 /* Success message styling */

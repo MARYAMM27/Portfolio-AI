@@ -7,12 +7,11 @@ import { signOut } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleLeft, faAngleRight, faUser, faTools,
-  faGraduationCap, faFolder, faSignOutAlt, faSun, faMoon,
+  faFolder, faSignOutAlt, faSun, faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 import { db, auth } from '../firebaseConfig';
 import PersonalInfo from './PersonalInfo';
 import Skills from './Skills';
-import Education from './Education';
 import Projects from './Projects';
 import Experience from './Experience'; // Import the Experience component
 import '../styles/AdminPanel.css';
@@ -23,10 +22,11 @@ const AdminPanel = () => {
     email: '',
     phone: '',
     address: '',
-    skills: [''],
-    education: [''],
+    skills: [],
+    education: [],
     experiences: [], // Add experiences to formData
     projects: [],
+    paragraph: '',
   });
 
   const [error, setError] = useState('');
@@ -44,7 +44,7 @@ const AdminPanel = () => {
           ...prevData,
           ...data,
           education: Array.isArray(data.education) ? data.education : [],
-          skills: Array.isArray(data.skills) ? data.skills : [''],
+          skills: Array.isArray(data.skills) ? data.skills : [],
           experiences: Array.isArray(data.experiences) ? data.experiences : [],
         }));
       }
@@ -101,12 +101,6 @@ const AdminPanel = () => {
             </Link>
           </li>
           <li>
-            <Link to="education">
-              <FontAwesomeIcon icon={faGraduationCap} />
-              {!collapsed && ' Education'}
-            </Link>
-          </li>
-          <li>
             <Link to="projects">
               <FontAwesomeIcon icon={faFolder} />
               {!collapsed && ' Projects'}
@@ -137,9 +131,6 @@ const AdminPanel = () => {
       </nav>
 
       <div className="admin-content">
-        <h1>Welcome to the Administration Editor</h1>
-        <p>Welcome to the administration editor to edit, add, update your data.</p>
-
         <div className="content-scroll">
           <Routes>
             <Route
@@ -156,16 +147,6 @@ const AdminPanel = () => {
               path="skills"
               element={(
                 <Skills
-                  formData={formData}
-                  setFormData={setFormData}
-                  handleUpdate={updateFirestore}
-                />
-              )}
-            />
-            <Route
-              path="education"
-              element={(
-                <Education
                   formData={formData}
                   setFormData={setFormData}
                   handleUpdate={updateFirestore}

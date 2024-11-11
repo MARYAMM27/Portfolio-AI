@@ -1,37 +1,81 @@
-// src/components/ProjectSlider.js
-import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
-const ProjectSlider = () => {
-  const [projects, setProjects] = useState([]);
+const ProjectSlider = ({ projects }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const fetchProjects = async () => {
-    const querySnapshot = await getDocs(collection(db, 'projects'));
-    const projectsData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    setProjects(projectsData);
+  // Navigate to the next project in the slider
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
   };
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  // Navigate to the previous project in the slider
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  };
+
+  // Destructure the current project data
+  const currentProject = projects[currentIndex];
+
+  const sliderButtonStyle = (direction) => ({
+    position: 'absolute',
+    top: '50%',
+    [direction]: '10px',
+    transform: 'translateY(-50%)',
+    fontSize: '24px',
+    background: 'rgba(0, 0, 0, 0.5)',
+    color: 'white',
+    border: 'none',
+    padding: '10px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    zIndex: 10,
+  });
 
   return (
-    <div className="project-slider">
-      {projects.length > 0 ? (
-        projects.map((project) => (
-          <div key={project.id} className="project-card">
-            <h3>{project.title}</h3>
-            <img src={project.image} alt={project.title} style={{ width: '200px', height: 'auto' }} />
-            <p>{project.description}</p>
-            <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
-          </div>
-        ))
-      ) : (
-        <p>No projects available.</p>
+    <div style={{
+      position: 'relative', width: '100%', maxWidth: '800px', margin: 'auto', textAlign: 'center',
+    }}
+    >
+      {/* Project Content */}
+      <h3>{currentProject?.title}</h3>
+      <p>{currentProject?.description}</p>
+      {currentProject?.fileURL && (
+        <img
+          src={currentProject?.fileURL}
+          alt={currentProject?.title}
+          style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+        />
       )}
+      {currentProject?.hyperlink && (
+        <p>
+          For more details, visit:
+          {' '}
+          <a href={currentProject?.hyperlink} target="_blank" rel="noopener noreferrer">
+            {currentProject?.hyperlink}
+          </a>
+        </p>
+      )}
+
+      {/* Slider Navigation Buttons */}
+      <button type="button" onClick={prevSlide} style={sliderButtonStyle('left')}>←</button>
+      <button type="button" onClick={nextSlide} style={sliderButtonStyle('right')}>→</button>
     </div>
   );
+};
+
+// Style for the navigation buttons
+
+// Prop validation
+ProjectSlider.propTypes = {
+  projects: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      fileURL: PropTypes.string,
+      hyperlink: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default ProjectSlider;

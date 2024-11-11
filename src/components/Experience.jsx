@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for validation
+import PropTypes from 'prop-types';
 import '../styles/Experience.css';
 
 const Experience = ({ formData, setFormData, handleUpdate }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Default to an empty array if experiences is undefined
+  const experiences = formData.experiences || [];
+
   const handleExperienceChange = (e, index, field) => {
-    const newExperiences = [...formData.experiences];
+    const newExperiences = [...experiences];
     newExperiences[index] = {
       ...newExperiences[index],
       [field]: e.target.value,
@@ -19,9 +22,9 @@ const Experience = ({ formData, setFormData, handleUpdate }) => {
     setFormData({
       ...formData,
       experiences: [
-        ...formData.experiences,
+        ...experiences,
         {
-          id: Date.now(), // Assign a unique id based on timestamp
+          id: Date.now(),
           jobTitle: '',
           company: '',
           startDate: '',
@@ -32,7 +35,7 @@ const Experience = ({ formData, setFormData, handleUpdate }) => {
   };
 
   const deleteExperience = (index) => {
-    const newExperiences = formData.experiences.filter((_, i) => i !== index);
+    const newExperiences = experiences.filter((_, i) => i !== index);
     setFormData({ ...formData, experiences: newExperiences });
     setSuccessMessage('Experience deleted successfully!');
     setErrorMessage('');
@@ -52,7 +55,7 @@ const Experience = ({ formData, setFormData, handleUpdate }) => {
   return (
     <div className="experience-container">
       <h2>Experience</h2>
-      {formData.experiences.map((experience, index) => (
+      {experiences.map((experience, index) => (
         <div key={experience.id || index} className="experience-field">
           <input
             className="experience-input"
@@ -81,8 +84,8 @@ const Experience = ({ formData, setFormData, handleUpdate }) => {
             onChange={(e) => handleExperienceChange(e, index, 'endDate')}
           />
           <button
-            className="delete-experience-button"
-            type="button" // Added explicit type attribute
+            className="button delete-experience-button"
+            type="button"
             onClick={() => deleteExperience(index)}
           >
             Delete
@@ -90,15 +93,15 @@ const Experience = ({ formData, setFormData, handleUpdate }) => {
         </div>
       ))}
       <button
-        className="add-experience-button"
-        type="button" // Added explicit type attribute
+        className="button add-experience-button"
+        type="button"
         onClick={addExperience}
       >
         Add Experience
       </button>
       <button
-        className="update-button"
-        type="button" // Added explicit type attribute
+        className="button update-button"
+        type="button"
         onClick={handleExperiencesUpdate}
       >
         Update Experiences
@@ -118,9 +121,9 @@ Experience.propTypes = {
         company: PropTypes.string.isRequired,
         startDate: PropTypes.string.isRequired,
         endDate: PropTypes.string.isRequired,
-        id: PropTypes.number, // Include id in prop types
+        id: PropTypes.number,
       }),
-    ).isRequired,
+    ),
   }).isRequired,
   setFormData: PropTypes.func.isRequired,
   handleUpdate: PropTypes.func.isRequired,

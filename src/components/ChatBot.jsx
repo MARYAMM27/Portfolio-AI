@@ -1,3 +1,4 @@
+// ChatBot.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import nlp from 'compromise';
@@ -11,9 +12,10 @@ import {
   faProjectDiagram,
 } from '@fortawesome/free-solid-svg-icons';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; // Ensure the import path is correct
+import { db } from '../firebaseConfig';
 import '../styles/ChatBot.css';
 import profileImage from '../assets/image.png';
+import ProjectSlider from './ProjectSlider';
 
 const ChatBot = () => {
   const [input, setInput] = useState('');
@@ -21,7 +23,7 @@ const ChatBot = () => {
   const [cvData, setCvData] = useState(null);
   const [loading, setLoading] = useState(true);
   const chatWindowRef = useRef(null);
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const predefinedTags = [
     {
@@ -38,7 +40,6 @@ const ChatBot = () => {
     },
   ];
 
-  // Fetch CV data from Firestore
   const fetchCvData = () => {
     const docRef = doc(db, 'cvData', 'cvData');
     onSnapshot(
@@ -46,12 +47,13 @@ const ChatBot = () => {
       (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          if (typeof data.skills === 'string') {
-            data.skills = data.skills.split(',').map((skill) => skill.trim());
-          }
-          if (typeof data.experience === 'string') {
-            data.experience = data.experience.split(',').map((exp) => exp.trim());
-          }
+          // Ensure skills and experience are arrays
+          data.skills = Array.isArray(data.skills)
+            ? data.skills
+            : data.skills?.split(',').map((skill) => skill.trim()) || [];
+          data.experience = Array.isArray(data.experience)
+            ? data.experience
+            : data.experience?.split(',').map((exp) => exp.trim()) || [];
           setCvData(data);
         }
         setLoading(false);
@@ -71,16 +73,14 @@ const ChatBot = () => {
   }, []);
 
   useEffect(() => {
-    if (chatWindowRef.current) {
-      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
-    }
+    chatWindowRef.current?.scrollTo({ top: chatWindowRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
   const normalizeQuery = (query) => {
     const doc = nlp(query.toLowerCase());
     let normalizedQuery = query.toLowerCase();
-
     const synonyms = {
+      introduce: ['tell me something about you', 'who are you', 'tell me about yourself', 'introduce yourself'],
       hi: ['hello', 'hey there', 'hey'],
       skills: ['skills', 'abilities', 'qualities'],
       experience: ['experience', 'background', 'work history'],
@@ -88,118 +88,199 @@ const ChatBot = () => {
       projects: ['projects', 'works', 'portfolio', 'expertise'],
       contact: ['contact', 'reach', 'get in touch'],
     };
-
     Object.keys(synonyms).forEach((key) => {
       synonyms[key].forEach((synonym) => {
-        if (doc.has(synonym)) {
-          normalizedQuery = normalizedQuery.replace(synonym, key);
-        }
+        if (doc.has(synonym)) normalizedQuery = key;
       });
     });
-
     return normalizedQuery;
   };
 
   const responseMap = {
-    hi: () => `Greetings! It's a pleasure to welcome you. 
-    I am here to assist you with any inquiries regarding my portfolio. 
-    How may I assist you today?`,
+    introduce: () => {
+      const introduction = cvData?.introduction || 'I am a dedicated professional eager to assist you!';
 
-    name: () => `My name is ${cvData?.name || 'N/A'}.\nI am pleased to share my professional experiences and
-     expertise with you. I am dedicated to continuous learning and committed to excellence in my work. 
-     My goal is to provide valuable insights and support as you explore my portfolio. 
-     \nWhat do you know about me, and how can I assist you further in your inquiries?`,
-
-    profession: () => `I specialize in the field of ${cvData?.profession || 'N/A'}.\nWhere I strive to bring creativity and expertise.`,
-
+      // Check for specific keywords in the introduction
+      if (introduction.toLowerCase().includes('software')) {
+        return `
+          I have a strong background in software development,
+           particularly in data analytics and machine learning using Python. My expertise includes designing and implementing algorithms that extract insights from data, facilitating better decision-making. I am passionate about leveraging technology to drive innovation and efficiency.
+        `;
+      } if (introduction.toLowerCase().includes('electrical') || introduction.toLowerCase().includes('telecom')) {
+        return `
+          I specialize in electrical power systems and telecommunications, 
+          focusing on optimizing network performance and ensuring reliable energy distribution.
+           My experience includes designing electrical systems and managing telecommunications projects that enhance connectivity and operational efficiency. I am dedicated to advancing technology in these critical sectors.
+        `;
+      }
+      return `
+          As a professional in management, I hold degrees in BBA and MBA, with a focus on finance. 
+          I possess a solid understanding of financial principles and management strategies that drive organizational success. My experience encompasses leading teams, managing projects, and optimizing operations for sustainable growth.
+        `;
+    },
+    hi: () => "Hello there! I'm here to help you explore my portfolio. Feel free to ask any questions or let me know what you’d like to learn more about!",
+    name: () => `My name is ${cvData?.name || 'N/A'}, and I am pleased to meet you. I bring a wealth of experience and a passion for excellence in my work. Let's connect and explore how I can contribute to your success.`,
+    profession: () => {
+      const skillsList = cvData?.skills?.map((skill, i) => `${i + 1}. ${skill.name || skill}`).join(', ') || 'N/A';
+      return `I specialize in ${skillsList}, where I leverage my skills to deliver impactful solutions. My expertise allows me to contribute effectively and drive success in various projects. I'm committed to continuous learning and staying ahead in my field.`;
+    },
     skills: () => {
-      const skillsList = Array.isArray(cvData?.skills) && cvData.skills.length > 0
-        ? cvData.skills.join(', ')
-        : 'Skills data is currently unavailable.';
-      return `Here are some of my skills:\n${skillsList}.`;
+      const skillList = cvData?.skills?.map((skill, i) => (
+        <div key={skill.id || skill.name || `skill-${i}`}>
+          <strong>
+            {i + 1}
+            .
+            {skill.name || skill}
+          </strong>
+        </div>
+
+      )) || <div>N/A</div>;
+
+      return (
+        <div>
+          <p>
+            I possess a diverse set of abilities:
+          </p>
+          <div style={{ margin: '10px 0' }}>
+            {skillList}
+          </div>
+          <p>
+            These skills enable me to tackle challenges effectively and
+            deliver high-quality results in my work.
+            I&apos;m always eager to learn new skills to stay relevant in my field.
+          </p>
+        </div>
+      );
     },
 
-    experience: () => {
-      if (Array.isArray(cvData?.experiences) && cvData.experiences.length > 0) {
-        const experienceDetails = cvData.experiences
-          .map((experience, index) => {
-            const {
-              jobTitle, company, startDate, endDate,
-            } = experience;
-            return `${index + 1}. ${jobTitle || 'N/A'} at ${company || 'N/A'} from ${startDate || 'N/A'} to ${endDate || 'N/A'}`;
-          })
-          .join('\n');
-        return `My professional experience includes:\n${experienceDetails}.`;
-      }
-      return 'Experience data is currently unavailable.';
-    },
+    experience: () => (cvData?.experiences?.length ? (
+      <>
+        Here’s a summary of my professional experience:
+        {cvData.experiences.map((exp, i) => (
+          <div key={exp.id || `experience-${i}`} style={{ marginTop: '10px' }}>
+            {i + 1}
+            .
+            <strong>Position:</strong>
+            {' '}
+            {exp.jobTitle}
+            <br />
+            <strong>Company:</strong>
+            {' '}
+            {exp.company}
+            <br />
+            <strong>Duration:</strong>
+            {' '}
+            {exp.startDate}
+            {' '}
+            -
+            {' '}
+            {exp.endDate}
+            <br />
+          </div>
+        ))}
+        <p>Feel free to ask more about any specific role!</p>
+      </>
+    ) : (
+      'I&apos;m currently unable to provide experience details. Please check back later.'
+    )),
+
     projects: () => {
-      // Retrieve the projects from localStorage (or replace this with your fetch logic)
-      const storedProjects = localStorage.getItem('projects');
-      const cvDataProjects = storedProjects ? JSON.parse(storedProjects) : [];
+      const storedProjects = JSON.parse(localStorage.getItem('projects') || '[]');
 
-      // Check if projects exist and map through them
-      if (Array.isArray(cvDataProjects) && cvDataProjects.length > 0) {
-        const projectDetails = cvDataProjects.map((project, index) => {
-          const projectHyperlink = project.hyperlink
-            ? `<a href="${project.hyperlink.startsWith('http') ? project.hyperlink : `https://${project.hyperlink}`}" target="_blank" rel="noopener noreferrer">${project.hyperlink}</a>`
-            : 'No hyperlink available.';
-
-          return `<strong>${index + 1}. ${project.title}</strong>\n
-          ${project.description || 'No description available.'}\n
-          <strong>Hyperlink:</strong> ${projectHyperlink}\n
-          <strong>Uploaded File:</strong> <a href="${project.fileURL}" target="_blank" rel="noopener noreferrer">${project.fileName}</a>`;
-        }).join('\n\n');
-
-        return `I am skilled in various projects, some of are more fascinating also these projects highlight my domain expertise:\n\n${projectDetails}`;
+      if (storedProjects.length === 0) {
+        return <p>No projects available.</p>;
       }
 
-      return 'No projects available.';
+      return (
+        <div>
+          <h3>Here are some of my projects:</h3>
+          <ProjectSlider projects={storedProjects} />
+        </div>
+      );
     },
 
-    education: () => (cvData?.education ? `I hold a degree in ${cvData.education}.` : 'Education data is currently unavailable.'),
+    education: () => {
+      const educationField = cvData?.education || 'N/A';
+      const educationDescription = Array.isArray(educationField)
+        ? educationField[0] : educationField;
+      let description = '';
 
-    contact: () => `You can reach me via email at ${cvData?.email || 'N/A'}.`,
+      if (educationDescription.toLowerCase().includes('computer')
+            || educationDescription.toLowerCase().includes('software')
+            || educationDescription.toLowerCase().includes('ai')) {
+        description = (
+          <span>
+            <strong>{educationDescription}</strong>
+            : My education equips me with the skills to develop innovative solutions
+            in data analytics and software development.
+          </span>
+        );
+      } else if (educationDescription.toLowerCase().includes('mba')
+                   || educationDescription.toLowerCase().includes('finance')
+                   || educationDescription.toLowerCase().includes('bba')
+                   || educationDescription.toLowerCase().includes('accounts')) {
+        description = (
+          <span>
+            <strong>{educationDescription}</strong>
+            : I have a background in management, focusing on strategic
+            financial decision-making and business administration.
+          </span>
+        );
+      } else if (educationDescription.toLowerCase().includes('engineering')
+                   || educationDescription.toLowerCase().includes('electrical')
+                   || educationDescription.toLowerCase().includes('telecommunication')) {
+        description = (
+          <span>
+            <strong>{educationDescription}</strong>
+            : My engineering education empowers me to design and implement effective
+            solutions in electrical systems and telecommunications.
+          </span>
+        );
+      } else {
+        description = (
+          <span>
+            <strong>{educationDescription}</strong>
+            : My educational background provides a solid foundation for my career.
+          </span>
+        );
+      }
 
-    goodbye: () => 'Thank you for your time! If you have any more questions, feel free to ask. Have a great day!',
+      return (
+        <div>
+          {description}
+        </div>
+      );
+    },
+
+    contact: () => `Reach me at ${cvData?.email || 'N/A'}.`,
+    goodbye: () => 'Thank you for your time! Have a great day!',
   };
 
   const handleBotResponse = (query) => {
-    const normalizedQuery = normalizeQuery(query);
-    const doc = nlp(normalizedQuery);
-    const responseKey = Object.keys(responseMap).find((key) => doc.has(key));
-
-    if (responseKey) {
-      const response = responseMap[responseKey];
-      return typeof response === 'function' ? response() : response;
-    }
-    return "I'm sorry, I don't have an answer for that.";
+    const responseKey = Object.keys(responseMap).find((key) => nlp(normalizeQuery(query)).has(key));
+    const response = responseKey
+      ? responseMap[responseKey]()
+      : 'Im sorry, I dont have an answer for that.';
+    return typeof response === 'string' ? <p>{response}</p> : response;
   };
 
   const handleSubmit = (query) => {
-    const trimmedQuery = query.trim();
-    if (trimmedQuery.length > 0) {
-      const userMessage = { id: Date.now(), text: trimmedQuery, sender: 'user' };
-      setMessages((prev) => [...prev, userMessage]);
+    if (!query.trim()) return;
+    const userMessage = { id: Date.now(), text: query, sender: 'user' };
+    setMessages((prev) => [...prev, userMessage]);
 
-      const botResponse = handleBotResponse(trimmedQuery);
-
-      setTimeout(() => {
-        const botMessage = { id: Date.now() + 1, text: botResponse, sender: 'bot' };
-        setMessages((prev) => [...prev, botMessage]);
-      }, 500);
-
-      setInput(''); // Clear the input after submitting
-    }
+    const botResponse = handleBotResponse(query);
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, text: botResponse, sender: 'bot' },
+      ]);
+    }, 500);
+    setInput('');
   };
 
-  const handleTagClick = (query) => {
-    handleSubmit(query);
-  };
-
-  const toggleAdminPanel = () => {
-    navigate('/login'); // Navigate to the Login page
-  };
+  const handleTagClick = (query) => handleSubmit(query);
+  const toggleAdminPanel = () => navigate('/login');
 
   return (
     <div className="chatbot-container">
@@ -209,82 +290,74 @@ const ChatBot = () => {
         <div className="chatbot-wrapper">
           <div className="sidebar-extended">
             <img src={profileImage} alt="Profile" className="profile-image" />
-            <div className="sidebar-info">
-              <h3>{cvData?.name || 'N/A'}</h3>
-
-              <div className="sidebar-section">
-                <p><strong>Email:</strong></p>
+            <h3>{cvData?.name || 'N/A'}</h3>
+            <ul className="info-list">
+              <li>
+                <strong>Email:</strong>
                 <ul className="email-list">
                   <li>{cvData?.email || 'N/A'}</li>
                 </ul>
-              </div>
-
-              <div className="sidebar-section">
-                <p><strong>Skills:</strong></p>
+              </li>
+              <li>
+                <strong>Skills:</strong>
                 <ul className="skills-list">
-                  {Array.isArray(cvData?.skills) && cvData.skills.length > 0 ? (
-                    cvData.skills.map((skill) => (
-                      <li key={skill}>{skill || 'No skills available.'}</li> // Use skill as key
-                    ))
-                  ) : (
-                    <li>No skills listed.</li>
-                  )}
+                  {cvData?.skills?.map((skill) => (
+                    <li key={skill.name || skill}>{skill.name || skill}</li>
+                  )) || <li>N/A</li>}
                 </ul>
-              </div>
-
-              <div className="sidebar-section">
-                <p><strong>Experience:</strong></p>
+              </li>
+              <li>
+                <strong>Experience:</strong>
                 <ul className="experience-list">
-                  {Array.isArray(cvData?.experiences) && cvData.experiences.length > 0 ? (
-                    cvData.experiences.map((exp) => (
-                      <li key={exp.id || `${exp.jobTitle}-${exp.company}-${exp.startDate}`}>
+                  {cvData?.experiences?.length
+                    ? cvData.experiences.map((exp) => (
+                      <li key={exp.id} className="experience-item">
+                        {exp.jobTitle}
                         {' '}
-                        {/* Use exp.id or a unique string as key */}
-                        {`${exp.jobTitle || 'N/A'} at ${exp.company || 'N/A'} (${exp.startDate || 'N/A'} - ${exp.endDate || 'N/A'})`}
+                        at
+                        {exp.company}
                       </li>
                     ))
-                  ) : (
-                    <li>No experience listed.</li>
-                  )}
+                    : <li>No experience listed.</li>}
                 </ul>
-              </div>
-
-              <div className="sidebar-section">
-                <p><strong>Education:</strong></p>
+              </li>
+              <li>
+                <strong>Education:</strong>
                 <ul className="education-list">
                   <li>{cvData?.education || 'N/A'}</li>
                 </ul>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
 
           <div className="chatbot-main">
             <div className="chat-window" ref={chatWindowRef}>
               {messages.map((msg) => (
-                <div key={msg.id} className={`message ${msg.sender}`} dangerouslySetInnerHTML={{ __html: msg.text }} />
+                <div key={msg.id} className={`message ${msg.sender}`}>
+                  {typeof msg.text === 'string' ? <p>{msg.text}</p> : msg.text}
+                </div>
               ))}
             </div>
 
             <div className="predefined-tags">
               {predefinedTags.map((tag) => (
                 <button
+                  type="button"
                   key={tag.id}
-                  type="button" // Added type attribute
                   onClick={() => handleTagClick(tag.query)}
-                  className="tag-button glow-circle"
-                  aria-label={tag.label}
+                  className="tag-button"
                 >
                   <FontAwesomeIcon icon={tag.icon} />
+                  {' '}
                   {tag.label}
                 </button>
-
               ))}
             </div>
 
             <form
               onSubmit={(e) => {
-                e.preventDefault(); // Prevent default form behavior
-                handleSubmit(input); // Submit the message
+                e.preventDefault();
+                handleSubmit(input);
               }}
               className="input-form"
             >
@@ -294,26 +367,18 @@ const ChatBot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me about my portfolio..."
                 className="chat-input"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault(); // Prevent new line on enter
-                    handleSubmit(input); // Submit the message
-                  }
-                }}
               />
-              <button type="submit" className="send-button" aria-label="Send">
+              <button type="submit" className="send-button">
                 <FontAwesomeIcon icon={faPaperPlane} />
               </button>
             </form>
           </div>
 
-          <div className="admin-toggle">
-            <button type="button" onClick={toggleAdminPanel} className="admin-button">
-              <FontAwesomeIcon icon={faCog} />
-              {' '}
-              Admin
-            </button>
-          </div>
+          <button type="button" onClick={toggleAdminPanel} className="admin-button">
+            <FontAwesomeIcon icon={faCog} />
+            {' '}
+            Admin
+          </button>
         </div>
       )}
     </div>

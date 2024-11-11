@@ -1,68 +1,96 @@
-.personal-info-container {
-  background-color: white; /* White background */
-  color: black; /* Black text */
-  padding: 20px; /* Add some padding */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+/* Personal Info Page Styles */
+.personal-info-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
-h2 {
-  margin-bottom: 20px; /* Space below the heading */
+/* CV Title Styles */
+.cv-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
-.info-field {
-  display: flex; /* Flexbox layout for alignment */
-  align-items: center; /* Center items vertically */
-  margin-bottom: 15px; /* Space between fields */
+/* Input and Field Styles */
+.cv-info-field {
+  margin-bottom: 15px;
 }
 
-label {
-  width: 100px; /* Fixed width for labels */
-  margin-right: 10px; /* Space between label and input */
-  font-weight: bold; /* Bold labels */
+.cv-info-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
 }
 
-.info-input {
-  flex: 1; /* Input takes remaining space */
-  padding: 10px; /* Padding inside input */
-  border: 1px solid grey; /* Grey border */
-  border-radius: 4px; /* Slightly rounded corners */
-  outline: none; /* Remove outline */
-  transition: border-color 0.3s; /* Smooth transition for border */
-  min-width: 250px; /* Minimum width for input fields */
-  min-height: 40px; /* Increased height for input fields */
+/* Button Styles */
+.cv-update-button,
+.cv-cancel-button,
+.cv-action-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 16px;
 }
 
-.info-input:focus {
-  border-color: black; /* Change border color on focus */
+.cv-update-button:hover,
+.cv-cancel-button:hover,
+.cv-action-button:hover {
+  background-color: #0056b3; /* Darken color on hover */
 }
 
-.update-button {
-  margin-top: 20px; /* Space above the button */
-  padding: 10px 15px; /* Button padding */
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Rounded corners */
-  background-color: black; /* Black background for button */
-  color: white; /* White text for button */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-weight: bold; /* Bold button text */
-  transition: background-color 0.3s; /* Smooth transition for background */
+/* Entry Details Styles */
+.cv-entry-details {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.update-button:hover {
-  background-color: grey; /* Change to grey on hover */
+/* Entry Title and Content Styles */
+.cv-entry-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
+.cv-entry-content {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.cv-entry-content h4 {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Success and Error Messages */
 .success-message {
-  color: green; /* Color for success messages */
+  color: green;
 }
 
 .error-message {
-  color: red; /* Color for error messages */
+  color: red;
 }
 
-.admin-content {
-  padding: 20px;
-  width: 100%; /* Ensure full width */
-  flex-grow: 1; /* Allow content to take available space */
+/* Profile Picture Styles */
+.profile-pic-preview {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: 10px;
+}
+
+.profile-pic {
+  max-width: 100px;
+  margin-top: 10px;
 }

@@ -12,14 +12,26 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": ["airbnb", "plugin:react/recommended", "plugin:react-hooks/recommended"],
-  "plugins": ["react"],
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended" 
+  ],
+  "plugins": ["react", "jsx-a11y"], 
   "rules": {
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
     "no-shadow": "off",
-    "react/no-danger": "off", // Disable the warning for dangerouslySetInnerHTML
+    "react/no-danger": "off",
+    "jsx-a11y/label-has-associated-control": [ // Accessibility rule
+      "error",
+      {
+        "assert": "htmlFor",
+        "depth": 3
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
